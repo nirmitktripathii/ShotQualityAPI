@@ -60,6 +60,8 @@ def health():
     return jsonify({'status': 'healthy', 'model_loaded': ModelService._model is not None})
 
 if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 8080))
     # Initialize model on startup
     ModelService.get_model()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=port)

@@ -35,8 +35,8 @@ def predict():
         dist = calculate_distance(x, y)
         angle = calculate_angle(x, y)
         
-        mapping = {'LeftFoot': 0, 'RightFoot': 1, 'Head': 0.5, 'OtherBodyPart': 0.5}
-        strong_foot = mapping.get(shot_type, 0.5)
+        mapping = {'RightFoot': 2, 'LeftFoot': 0, 'Head': 1, 'OtherBodyPart': 1}
+        strong_foot = mapping.get(shot_type, 2)
 
         features = np.array([[dist, angle, strong_foot]])
         

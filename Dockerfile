@@ -11,11 +11,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Generate the model during build
-RUN python train_model.py
+# Model is pre-uploaded as .pickle, no training needed during build
 
-# Expose port
-EXPOSE 8080
+# Expose port (standard for HF Spaces)
+EXPOSE 7860
 
 # Run the application
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
+CMD ["gunicorn", "--bind", "0.0.0.0:7860", "--workers", "1", "--threads", "8", "--timeout", "0", "app:app"]
